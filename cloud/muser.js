@@ -4,7 +4,7 @@
 var mutil = require('cloud/mutil');
 var mlog = require('cloud/mlog');
 var _ = require('underscore');
-var Avatar = AV.Object.extend('nickname');
+var Avatar = AV.Object.extend('username');
 var userSheet = 'testsdfsdf';
 
 function findUserById(userId, queryFn) {
@@ -21,14 +21,14 @@ function findUser(modifyQueryFn) {
 
 function findUserByName(name) {
   return findUser(function (q) {
-    q.equalTo('nickname', name);
+    q.equalTo('username', name);
   });
 }
 
 function findUsernameById(id) {
   var p = new AV.Promise();
   findUserById(id).then(function (user) {
-    p.resolve(user.get('nickname'));
+    p.resolve(user.get('username'));
   }, function (error) {
     console.log(error.message);
     p.resolve();
